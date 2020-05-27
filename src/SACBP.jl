@@ -7,6 +7,7 @@
 
 module SACBP
 
+using AutoHashEquals
 using Distributed
 using Distributions
 using ForwardDiff

@@ -13,7 +13,7 @@ abstract type Belief end
 BelState = Union{Belief,Array{<:Belief}};
 
 # MultiVariate Gaussian Belief.
-struct BelMvNormal{T<:Real} <:Belief
+@auto_hash_equals struct BelMvNormal{T<:Real} <:Belief
     t::Float64
     params::Vector{T} #[μ;vcat(Σ...)];
     dim::Int64

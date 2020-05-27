@@ -1,0 +1,382 @@
+julia -O3 scripts/stats_evaluation_multi_target_localization.jl 
+------- RNG Seed: 133 & #Cases Tested: 0 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  1.633027 seconds (5.74 M allocations: 284.244 MiB, 4.49% gc time)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+ 10.078325 seconds (6.47 M allocations: 318.295 MiB, 1.05% gc time)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:47
+Average control computation time: 0.107 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.977073 seconds (2.45 M allocations: 141.788 MiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:48
+Average control computation time: 0.107 [s]
+------- RNG Seed: 134 & #Cases Tested: 1 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000789 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.105931 seconds (4.03 k allocations: 591.648 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:45
+Average control computation time: 0.105 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.096270 seconds (1.68 M allocations: 103.391 MiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:27
+Average control computation time: 0.087 [s]
+------- RNG Seed: 135 & #Cases Tested: 2 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000690 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.105585 seconds (4.03 k allocations: 591.633 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:46
+Average control computation time: 0.106 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.074420 seconds (1.67 M allocations: 102.981 MiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:25
+Average control computation time: 0.085 [s]
+------- RNG Seed: 136 & #Cases Tested: 3 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000635 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.098704 seconds (4.03 k allocations: 591.664 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:46
+Average control computation time: 0.106 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.079558 seconds (1.68 M allocations: 103.391 MiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:28
+Average control computation time: 0.088 [s]
+------- RNG Seed: 137 & #Cases Tested: 4 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000694 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.104152 seconds (4.03 k allocations: 591.992 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:45
+Average control computation time: 0.105 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.073706 seconds (1.68 M allocations: 103.391 MiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:27
+Average control computation time: 0.087 [s]
+------- RNG Seed: 138 & #Cases Tested: 5 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000650 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.108357 seconds (4.04 k allocations: 592.102 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:45
+Average control computation time: 0.106 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.210447 seconds (1.67 M allocations: 102.981 MiB, 62.96% gc time)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:28
+Average control computation time: 0.089 [s]
+------- RNG Seed: 139 & #Cases Tested: 6 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000725 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.107128 seconds (4.03 k allocations: 591.992 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:45
+Average control computation time: 0.105 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.207471 seconds (1.67 M allocations: 102.981 MiB, 62.45% gc time)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:31
+Average control computation time: 0.091 [s]
+------- RNG Seed: 140 & #Cases Tested: 7 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000801 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.104993 seconds (4.04 k allocations: 592.055 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:46
+Average control computation time: 0.106 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.075844 seconds (1.65 M allocations: 101.340 MiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:30
+Average control computation time: 0.09 [s]
+------- RNG Seed: 141 & #Cases Tested: 8 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000711 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.103608 seconds (4.04 k allocations: 592.117 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:45
+Average control computation time: 0.105 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.079346 seconds (1.67 M allocations: 102.570 MiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:33
+Average control computation time: 0.093 [s]
+------- RNG Seed: 142 & #Cases Tested: 9 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000687 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.106864 seconds (4.03 k allocations: 591.992 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:46
+Average control computation time: 0.106 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.080935 seconds (1.68 M allocations: 103.390 MiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:33
+Average control computation time: 0.093 [s]
+------- RNG Seed: 143 & #Cases Tested: 10 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000826 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.115804 seconds (4.03 k allocations: 591.977 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:45
+Average control computation time: 0.105 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.075155 seconds (1.66 M allocations: 102.160 MiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:29
+Average control computation time: 0.089 [s]
+------- RNG Seed: 144 & #Cases Tested: 11 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000679 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.112150 seconds (4.03 k allocations: 591.648 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:46
+Average control computation time: 0.106 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.071785 seconds (1.68 M allocations: 103.392 MiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:28
+Average control computation time: 0.088 [s]
+------- RNG Seed: 145 & #Cases Tested: 12 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000653 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.103918 seconds (4.03 k allocations: 591.727 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:46
+Average control computation time: 0.106 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.081639 seconds (1.67 M allocations: 102.981 MiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:33
+Average control computation time: 0.093 [s]
+------- RNG Seed: 146 & #Cases Tested: 13 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000669 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.109870 seconds (4.03 k allocations: 591.977 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:46
+Average control computation time: 0.106 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.201963 seconds (1.68 M allocations: 103.392 MiB, 63.81% gc time)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:30
+Average control computation time: 0.09 [s]
+------- RNG Seed: 147 & #Cases Tested: 14 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000806 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.106311 seconds (4.03 k allocations: 592.008 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:46
+Average control computation time: 0.106 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.204245 seconds (1.68 M allocations: 103.392 MiB, 63.98% gc time)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:28
+Average control computation time: 0.088 [s]
+------- RNG Seed: 148 & #Cases Tested: 15 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000622 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.099993 seconds (4.04 k allocations: 591.852 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:47
+Average control computation time: 0.107 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.081615 seconds (1.68 M allocations: 103.391 MiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:33
+Average control computation time: 0.093 [s]
+------- RNG Seed: 149 & #Cases Tested: 16 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000677 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.103103 seconds (4.04 k allocations: 591.773 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:45
+Average control computation time: 0.105 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.082385 seconds (1.67 M allocations: 102.981 MiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:32
+Average control computation time: 0.092 [s]
+------- RNG Seed: 150 & #Cases Tested: 17 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000659 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.102162 seconds (4.03 k allocations: 591.664 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:45
+Average control computation time: 0.105 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.208064 seconds (1.67 M allocations: 102.981 MiB, 62.62% gc time)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:31
+Average control computation time: 0.091 [s]
+------- RNG Seed: 151 & #Cases Tested: 18 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000669 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.111933 seconds (4.03 k allocations: 591.977 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:45
+Average control computation time: 0.106 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.210165 seconds (1.67 M allocations: 102.980 MiB, 63.25% gc time)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:30
+Average control computation time: 0.09 [s]
+------- RNG Seed: 152 & #Cases Tested: 19 -------
+1. Simulation with Greedy Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.000707 seconds (11.67 k allocations: 901.688 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:00:01
+Average control computation time: 0.001 [s]
+2. Simulation with SACBP Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.105457 seconds (4.03 k allocations: 591.664 KiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:46
+Average control computation time: 0.106 [s]
+3. Simulation with MCTS Controller
+Loaded target motion data from /home/haruki/Documents/2019-20_Spring/SACBP.jl/data/multi_target_localization/target_motion_data_localization.jld2
+  0.076740 seconds (1.67 M allocations: 102.980 MiB)
+Controller Compiled. Starting Simulation...
+Progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| Time: 0:01:29
+Average control computation time: 0.089 [s]
+

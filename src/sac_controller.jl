@@ -125,7 +125,7 @@ function optControlSchedule(simModel::SimulatePosRangeLocalization2D,
             coeffVec = coeffMat[:,t];
             cost = 1/2*quadform(u,Cu) + dot(u,coeffVec);
             prob = minimize(cost,constraint);
-            solve!(prob,ECOSSolver(verbose=false),verbose=false);
+            solve!(prob,() -> ECOS.Optimizer(verbose=false))#,verbose=false);
             UOptArray[t] = PosControl(UArray[t].t,vec(evaluate(u)));
             CostArray[t] = prob.optval;
         end
@@ -170,10 +170,12 @@ function sacControlUpdate(simModel::SimulatePosRangeLocalization2D,
                           u_params_min::Vector{<:Real},
                           u_params_max::Vector{<:Real},
                           numSamples::Int64, # For forward-backward simulation.
-                          rng::MersenneTwister)
-    coeffMat = controlCoeffsExpected(simModel,s_init,UArray,numSamples,rng);
-    UOptSchedule,CostArray = optControlSchedule(simModel,UArray,coeffMat,u_params_min,u_params_max);
-    tcalc = 1/4*simModel.dto; # Assumption for offline simulation.
+                          rng::MersenneTwister; offline=true)
+    tcalc = @elapsed coeffMat = controlCoeffsExpected(simModel,s_init,UArray,numSamples,rng);
+    tcalc += @elapsed UOptSchedule,CostArray = optControlSchedule(simModel,UArray,coeffMat,u_params_min,u_params_max);
+    if offline
+        tcalc = 1/4*simModel.dto; # Assumption for offline simulation.
+    end
     UOpt,tcalc = determineControlTime(tcalc,simModel,UOptSchedule,CostArray);
     UArrayNew = copy(UArray);
     ActTimes = Real[];
@@ -193,10 +195,12 @@ function sacControlUpdate(simModel::SimulatePosRangeLocalization2D,
                           u_param_min::Vector{<:Real},
                           u_param_max::Vector{<:Real},
                           numSamples::Int64, # For forward-backward simulation.
-                          rng::MersenneTwister)
-    coeffMat,NominalControlCostArray = controlCoeffsExpected(simModel,nominalPolicy,s_init,u_param_min,u_param_max,UArray,numSamples,rng);
-    UOptSchedule,CostArray = optControlSchedule(simModel,UArray,coeffMat,u_param_min,u_param_max);
-    tcalc = 1/4*simModel.dto; # Assumption for offline simulation.
+                          rng::MersenneTwister; offline=true)
+    tcalc = @elapsed coeffMat,NominalControlCostArray = controlCoeffsExpected(simModel,nominalPolicy,s_init,u_param_min,u_param_max,UArray,numSamples,rng);
+    tcalc += @elapsed UOptSchedule,CostArray = optControlSchedule(simModel,UArray,coeffMat,u_param_min,u_param_max);
+    if offline
+        tcalc = 1/4*simModel.dto; # Assumption for offline simulation.
+    end
     UOpt,tcalc = determineControlTime(tcalc,simModel,UOptSchedule,CostArray,NominalControlCostArray);
     UArrayNew = copy(UArray);
     ActTimes = Real[];
@@ -329,7 +333,7 @@ function optControlSchedule(simModel::SimulateManipulate2D,
             coeffVec = coeffMat[:,t];
             cost = 1/2*quadform(u,Cu) + dot(u,coeffVec);
             prob = minimize(cost,constraint);
-            solve!(prob,ECOSSolver(verbose=false),verbose=false);
+            solve!(prob,() -> ECOS.Optimizer(verbose=false))#,verbose=false);
             UOptArray[t] = MControl2D(UArray[t].t,vec(evaluate(u)));
             CostArray[t] = prob.optval;
         end
@@ -374,10 +378,12 @@ function sacControlUpdate(simModel::SimulateManipulate2D,
                           u_params_min::Vector{<:Real},
                           u_params_max::Vector{<:Real},
                           numSamples::Int64, # For forward-backward simulation.
-                          rng::MersenneTwister)
-    coeffMat = controlCoeffsExpected(simModel,s_init,UArray,numSamples,rng);
-    UOptSchedule,CostArray = optControlSchedule(simModel,UArray,coeffMat,u_params_min,u_params_max);
-    tcalc = 1/4*simModel.dto; # For offline simulation.
+                          rng::MersenneTwister; offline=true)
+    tcalc = @elapsed coeffMat = controlCoeffsExpected(simModel,s_init,UArray,numSamples,rng);
+    tcalc += @elapsed UOptSchedule,CostArray = optControlSchedule(simModel,UArray,coeffMat,u_params_min,u_params_max);
+    if offline
+        tcalc = 1/4*simModel.dto; # For offline simulation.
+    end
     UOpt,tcalc = determineControlTime(tcalc,simModel,UOptSchedule,CostArray);
     UArrayNew = copy(UArray);
     ActTimes = Real[];
@@ -399,10 +405,12 @@ function sacControlUpdate(simModel::SimulateManipulate2D,
                           posGain,
                           rotGain,
                           numSamples::Int64, # For forward-backward simulation.
-                          rng::MersenneTwister)
-    coeffMat,NominalControlCostArray = controlCoeffsExpected(simModel,nominalPolicy,s_init,u_param_min,u_param_max,posGain,rotGain,UArray,numSamples,rng);
-    UOptSchedule,CostArray = optControlSchedule(simModel,UArray,coeffMat,u_param_min,u_param_max);
-    tcalc = 1/4*simModel.dto; # For offline simulation.
+                          rng::MersenneTwister; offline=true)
+    tcalc = @elapsed coeffMat,NominalControlCostArray = controlCoeffsExpected(simModel,nominalPolicy,s_init,u_param_min,u_param_max,posGain,rotGain,UArray,numSamples,rng);
+    tcalc += @elapsed UOptSchedule,CostArray = optControlSchedule(simModel,UArray,coeffMat,u_param_min,u_param_max);
+    if offline
+        tcalc = 1/4*simModel.dto; # For offline simulation.
+    end
     UOpt,tcalc = determineControlTime(tcalc,simModel,UOptSchedule,CostArray,NominalControlCostArray);
     UArrayNew = copy(UArray);
     ActTimes = Real[];

@@ -7,8 +7,10 @@
 
 using Test
 using SACBP
+import Distributed
 
 @testset "SACBP Unit Tests" begin
+@assert Distributed.nprocs() == 1 "Run this test with Distributed.nprocs() == 1 so SAC Control Test does not fail due to distributed computation."
 @info "Executing Type Definition Test"
 include("type_test.jl");
 @info "Executing State Transition Test"

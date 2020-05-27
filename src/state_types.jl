@@ -9,7 +9,7 @@ import Base.vec
 
 abstract type PhysState end;
 
-struct PhysPos{T<:Real} <: PhysState
+@auto_hash_equals struct PhysPos{T<:Real} <: PhysState
     t::Float64
     pos::Vector{T} # [x1,x2,x3,...]
     dim::Int64
@@ -26,7 +26,7 @@ PhysPos(t::Real,pos::T,dim=1) where {T<:Real} = PhysPos{T}(t,[pos],dim);
 vec(p::PhysPos) = p.pos;
 
 
-struct PhysManipulate2D{T<:Real} <: PhysState
+@auto_hash_equals struct PhysManipulate2D{T<:Real} <: PhysState
     t::Float64
     pos::Vector{T} # [x,y]
     θ::T # 0 <= θ < 2pi
@@ -57,7 +57,7 @@ function PhysManipulate2D(t::Real,params::Vector{T}) where {T<:Real}
 end
 vec(p::PhysManipulate2D) = vcat(p.pos,p.θ,p.vel,p.ω,p.m,p.J,p.r,p.μ);
 
-struct AugState{P<:PhysState,B<:BelState}
+@auto_hash_equals struct AugState{P<:PhysState,B<:BelState}
     t::Float64
     p::P
     b::B
