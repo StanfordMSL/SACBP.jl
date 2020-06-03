@@ -299,7 +299,7 @@ function trans_jacobi(model::CPredictManipulate2D,b::BelMvNormal{T},u::MControl2
         end
     end
     cfg = ForwardDiff.JacobianConfig(f,b.params[1:11],ForwardDiff.Chunk{11}())
-    Jacobian[12:end,1:11] = ForwardDiff.jacobian(f,b.params[1:11],cfg);
+    Jacobian[12:end,1:11] = ForwardDiff.jacobian(f,b.params[1:11])#,cfg);
     return Jacobian
 end
 function trans_jacobi_auto(model::CPredictManipulate2D,b::BelMvNormal{T},u::MControl2D{<:Real},Q::Matrix{Float64}) where T <: Real
@@ -395,8 +395,8 @@ function trans_jacobi_auto(model::DUpdateManipulate2D,b::BelMvNormal{T},u::MCont
         return trans(model,bel,u,y,R).params
     end
     cfg = ForwardDiff.JacobianConfig(f,b.params,ForwardDiff.Chunk{40}());
-    return ForwardDiff.jacobian(f,b.params,cfg)
-    #return ForwardDiff.jacobian(f,b.params)
+    #return ForwardDiff.jacobian(f,b.params,cfg)
+    return ForwardDiff.jacobian(f,b.params)
 end
 
 

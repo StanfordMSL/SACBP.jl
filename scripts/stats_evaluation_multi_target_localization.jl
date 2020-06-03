@@ -101,7 +101,7 @@ function evaluate()
     cost_std_sacbp = [std([cost[ii] for cost in cost_sacbp]) for ii = 1:length(cost_sacbp[1])]
     cost_std_greedy = [std([cost[ii] for cost in cost_greedy]) for ii = 1:length(cost_greedy[1])];
     cost_std_ergodic = [std([cost[ii] for cost in cost_ergodic]) for ii = 1:length(cost_ergodic[1])];
-    # # In this problem, cost is w.r.t. the true state history.
+
     MetricHistoryGreedy = mean(cost_greedy)
     plot(time_idx_array,MetricHistoryGreedy[1:end-1],xlabel="Time [s]",ribbon=cost_std_greedy,fillalpha=0.3,ylabel="Worst Entropy Value",label="Greedy",color=:dimgrey,linewidth=2.,linestyle=:dot)
     MetricHistoryMCTS = mean(cost_mcts)

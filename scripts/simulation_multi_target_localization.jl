@@ -333,6 +333,6 @@ if abspath(PROGRAM_FILE) == @__FILE__
     simulate_main("greedy", rng_num=169, animate=true, plotfig=true, verbose=false);
     println("2. Simulation with SACBP Controller")
     simulate_main("sacbp", rng_num=169, animate=true, plotfig=true, verbose=false);
-    println("3. Simulation with MCTS-DPW Controller...")
+    println("3. Simulation with MCTS-DPW Controller")
     simulate_main("mcts", rng_num=169, animate=true, plotfig=true, verbose=false);
 end

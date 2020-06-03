@@ -174,7 +174,7 @@ function sacControlUpdate(simModel::SimulatePosRangeLocalization2D,
     tcalc = @elapsed coeffMat = controlCoeffsExpected(simModel,s_init,UArray,numSamples,rng);
     tcalc += @elapsed UOptSchedule,CostArray = optControlSchedule(simModel,UArray,coeffMat,u_params_min,u_params_max);
     if offline
-        tcalc = 1/4*simModel.dto; # Assumption for offline simulation.
+        tcalc = 3/4*simModel.dto; # Assumption for offline simulation.
     end
     UOpt,tcalc = determineControlTime(tcalc,simModel,UOptSchedule,CostArray);
     UArrayNew = copy(UArray);
@@ -199,7 +199,7 @@ function sacControlUpdate(simModel::SimulatePosRangeLocalization2D,
     tcalc = @elapsed coeffMat,NominalControlCostArray = controlCoeffsExpected(simModel,nominalPolicy,s_init,u_param_min,u_param_max,UArray,numSamples,rng);
     tcalc += @elapsed UOptSchedule,CostArray = optControlSchedule(simModel,UArray,coeffMat,u_param_min,u_param_max);
     if offline
-        tcalc = 1/4*simModel.dto; # Assumption for offline simulation.
+        tcalc = 3/4*simModel.dto; # Assumption for offline simulation.
     end
     UOpt,tcalc = determineControlTime(tcalc,simModel,UOptSchedule,CostArray,NominalControlCostArray);
     UArrayNew = copy(UArray);
@@ -382,7 +382,7 @@ function sacControlUpdate(simModel::SimulateManipulate2D,
     tcalc = @elapsed coeffMat = controlCoeffsExpected(simModel,s_init,UArray,numSamples,rng);
     tcalc += @elapsed UOptSchedule,CostArray = optControlSchedule(simModel,UArray,coeffMat,u_params_min,u_params_max);
     if offline
-        tcalc = 1/4*simModel.dto; # For offline simulation.
+        tcalc = 3/4*simModel.dto; # For offline simulation.
     end
     UOpt,tcalc = determineControlTime(tcalc,simModel,UOptSchedule,CostArray);
     UArrayNew = copy(UArray);
@@ -409,7 +409,7 @@ function sacControlUpdate(simModel::SimulateManipulate2D,
     tcalc = @elapsed coeffMat,NominalControlCostArray = controlCoeffsExpected(simModel,nominalPolicy,s_init,u_param_min,u_param_max,posGain,rotGain,UArray,numSamples,rng);
     tcalc += @elapsed UOptSchedule,CostArray = optControlSchedule(simModel,UArray,coeffMat,u_param_min,u_param_max);
     if offline
-        tcalc = 1/4*simModel.dto; # For offline simulation.
+        tcalc = 3/4*simModel.dto; # For offline simulation.
     end
     UOpt,tcalc = determineControlTime(tcalc,simModel,UOptSchedule,CostArray,NominalControlCostArray);
     UArrayNew = copy(UArray);
