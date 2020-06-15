@@ -1,7 +1,7 @@
 import Distributions
 using Statistics
 
-include("simulation_manipulation_with_unknown_parameters.jl")
+include(joinpath(@__DIR__, "simulation_manipulation_with_unknown_parameters.jl"))
 
 function instCost_true(model::CostManipulate2D,x::PhysManipulate2D,u::MControl2D,Cs::Matrix{Float64},Cu::Matrix{Float64})
     xVec = vec(x);

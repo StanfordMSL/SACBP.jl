@@ -1,7 +1,7 @@
 import Distributions
 using Statistics
 
-include("simulation_multi_target_localization.jl")
+include(joinpath(@__DIR__, "simulation_multi_target_localization.jl"))
 
 function getMetricHistory(s_history)
     # Evaluation Metric: Worst Entropy
