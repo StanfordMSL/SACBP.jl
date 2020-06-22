@@ -25,11 +25,6 @@ PosControl(t::Real,vel::Vector{T},dim::Int64=length(vel)) where {T<:Real} = PosC
 PosControl(t::Real,vel::T) where {T<:Real} = PosControl{T}(t,[vel],1);
 vec(u::PosControl) = u.vel;
 
-struct PosHeadControl2D{T<:Real} <: Control
-    t::Float64
-    vel::T
-    ω::T
-end
 
 struct MControl2D{T<:Real} <: Control
     t::Float64

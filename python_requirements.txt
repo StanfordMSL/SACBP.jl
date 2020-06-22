@@ -1,0 +1,5 @@
+numpy==1.18.5
+casadi==3.5.1
+matplotlib
+jupyter
+ipykernel

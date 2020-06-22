@@ -3,22 +3,16 @@ using Statistics
 
 include(joinpath(@__DIR__, "simulation_manipulation_with_unknown_parameters.jl"))
 
-function instCost_true(model::CostManipulate2D,x::PhysManipulate2D,u::MControl2D,Cs::Matrix{Float64},Cu::Matrix{Float64})
-    xVec = vec(x);
-    xVec_target = [0.,0.,pi,0.,0.,0.,0.,0.,0.,0.,0.];    # Changing target \theta to pi.
-    return 1/2*(xVec - xVec_target)'*Cs*(xVec - xVec_target) + 1/2*vec(u)'*Cu*vec(u);
+function state_res_norm(x::PhysManipulate2D)
+    xVec = vec(x)[1:6];
+    xVec_target = [0.,0.,pi,0.,0.,0.];
+    return norm(xVec - xVec_target)
 end;
 
-function termCost_true(model::CostManipulate2D,x::PhysManipulate2D,Cs::Matrix{Float64})
-    xVec = vec(x);
-    xVec_target = [0.,0.,pi,0.,0.,0.,0.,0.,0.,0.,0.];    # Changing target \theta to pi.
-    return 1/2*(xVec - xVec_target)'*Cs*(xVec - xVec_target);
-end
-
-function getCostHistory(x_history,u_history,Cs,Cu)
+function getMetricHistory(x_history)
     CostArray = Float64[];
     for t = 1:length(x_history)-1
-        push!(CostArray,instCost_true(CostManipulate2D(),x_history[t],u_history[t],Cs,Cu))
+        push!(CostArray,state_res_norm(x_history[t]))
     end
     #push!(CostArray,termCost_true(CostManipulate2D(),x_history[end],Cs));
     return CostArray
@@ -44,7 +38,7 @@ function evaluate()
         try
             y_history,tcalc_true_history,b_history,x_history,u_history,U_pool,Cs,Cu =
             simulate_main("sacbp",rng_num=rngnum, animate=false, plotfig=false, verbose=false);
-            push!(cost_sacbp,getCostHistory(x_history,u_history,Cs,Cu));
+            push!(cost_sacbp,getMetricHistory(x_history));
             push!(tcalc_sacbp,tcalc_true_history);
             if isempty(time_idx_array)
                 push!(time_idx_array, unique([x.t for x in x_history]))
@@ -57,7 +51,7 @@ function evaluate()
         try
             y_history,tcalc_true_history,b_history,x_history,u_history,U_pool,Cs,Cu =
             simulate_main("mcts",rng_num=rngnum, animate=false, plotfig=false, verbose=false);
-            push!(cost_mcts,getCostHistory(x_history,u_history,Cs,Cu));
+            push!(cost_mcts,getMetricHistory(x_history));
             push!(tcalc_mcts,tcalc_true_history);
             if isempty(time_idx_array)
                 push!(time_idx_array, unique([x.t for x in x_history]))
@@ -72,7 +66,7 @@ function evaluate()
         try
             y_history,tcalc_true_history,b_history,x_history,u_history,U_pool,Cs,Cu =
             simulate_main("ilqg",rng_num=rngnum, animate=false, plotfig=false, verbose=false);
-            push!(cost_ilqg,getCostHistory(x_history,u_history,Cs,Cu));
+            push!(cost_ilqg,getMetricHistory(x_history));
             push!(tcalc_ilqg,tcalc_true_history);
             if isempty(time_idx_array)
                 push!(time_idx_array, unique([x.t for x in x_history]))
@@ -109,11 +103,11 @@ function evaluate()
     cost_std_ilqg = [std([cost[ii] for cost in cost_ilqg]) for ii = 1:length(cost_ilqg[1])];
     # # In this problem, cost is w.r.t. the true state history.
     CostHistoryMCTS = mean(cost_mcts)
-    plot(time_idx_array[1][1:end-1],CostHistoryMCTS,xlabel="Time [s]",ribbon=cost_std_mcts,fillalpha=0.3,ylabel="Running Cost Value",label="MCTS-DPW",color=:lightcoral,linewidth=2.,linestyle=:dash);
+    plot(time_idx_array[1][1:end-1],CostHistoryMCTS,xlabel="Time [s]",ribbon=cost_std_mcts,fillalpha=0.3,ylabel="Residual Norm",label="MCTS-DPW",color=:lightcoral,linewidth=2.,linestyle=:dash);
     CostHistoryiLQG = mean(cost_ilqg)
     plot!(time_idx_array[1][1:end-1],CostHistoryiLQG,label="Belief iLQG",color=:darkorange,ribbon=cost_std_ilqg,fillalpha=0.3,linewidth=2.,linestyle=:dashdot)
     CostHistorySACBP = mean(cost_sacbp)
-    plot!(time_idx_array[1][1:end-1],CostHistorySACBP,label="SACBP",color=:darkblue,ribbon=cost_std_sacbp,fillalpha=0.3,linewidth=2.,size=(400,400),ylim=(-1.,200.))
+    plot!(time_idx_array[1][1:end-1],CostHistorySACBP,label="SACBP",color=:darkblue,ribbon=cost_std_sacbp,fillalpha=0.3,linewidth=2.,size=(400,400),ylim=(0.,5.))
     savefig(joinpath(data_dir, "manipulation_costs.pdf"))
     # Plot Computation Time Comparison
     tcalcTrueArray = [tcalc_ilqg,tcalc_mcts,tcalc_sacbp]

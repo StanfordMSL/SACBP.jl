@@ -1,3 +1,4 @@
+ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")
 using Distributed
 # using 6 cores
 if 6 - Distributed.nprocs() > 0
@@ -17,6 +18,7 @@ using FileIO
 include(joinpath(@__DIR__, "../baseline_implementations/p_control.jl"))
 include(joinpath(@__DIR__, "../baseline_implementations/mcts.jl"))
 include(joinpath(@__DIR__, "../baseline_implementations/belief_ilqg.jl"))
+include(joinpath(@__DIR__, "../baseline_implementations/tlqg.jl"))
 
 function get_initial_true_state()
     px0_true = 1.5;    # True px(0)
@@ -82,9 +84,10 @@ function simulate(b_init::BelMvNormal{<:Real},
                   tf::Float64=20.0, # simulation horizon [s]
                   mcts_param::Union{Nothing, MCTSParams}=nothing,
                   ilqgPolicy::Union{Nothing, Dict{String,Any}}=nothing,
+                  tlqg::Union{Nothing, TLQG_Planner_Manipulate2D}=nothing,
                   animate=true, plotfig=true, verbose=true)
     rng = MersenneTwister(rng_num)
-    @assert controlMode in ["sacbp", "mcts", "ilqg"];
+    @assert controlMode in ["sacbp", "mcts", "ilqg", "tlqg", "tlqg_offline"];
     if animate
         # Animation Object.
         anim = Animation();
@@ -120,7 +123,16 @@ function simulate(b_init::BelMvNormal{<:Real},
     elseif controlMode == "ilqg" # Belief iLQG (initialized with PControl)
         @assert !isnothing(ilqgPolicy) "iLQG Policy file not given"
         @time U_default = ilqgControlUpdate(ilqgPolicy,b_init,U_default,u_param_min,u_param_max,dto,dto)
+    elseif controlMode == "tlqg" || controlMode == "tlqg_offline"
+        @assert !isnothing(tlqg) "T-LQG Planner object not given"
+        @time ~,U_default = tlqgControlUpdate(tlqg,b_init,U_default,verbose=verbose,online=true)
+    elseif controlMode == "tlqg_offline"
+        # offline == planner can take much longer time to compute NLP iterations (until convergence).
+        # Only for collecting computation time statistics
+        @assert !isnothing(tlqg) "T-LQG Planner object not given"
+        @time ~,U_default = tlqgControlUpdate(tlqg,b_init,U_default,verbose=verbose,online=false)
     end
+
     println("Controller Compiled. Starting Simulation...")
 
     # Simulation.
@@ -167,13 +179,30 @@ function simulate(b_init::BelMvNormal{<:Real},
                 tcalc_true = @elapsed U_pool = mctsControlUpdate(mctsPolicyPControl,b_new,U_pool,dto);
                 push!(tcalc_true_history,tcalc_true);
                 if verbose
-                    println((s.t,"Control Updated."));
+                    println((b.t,"Control Updated."));
                 end
             elseif controlMode == "ilqg" # Belief iLQG (with PControl)
                 tcalc_true = @elapsed U_pool = ilqgControlUpdate(ilqgPolicy,b_new,U_pool,u_param_min,u_param_max,dto,dto);
                 push!(tcalc_true_history,tcalc_true);
                 if verbose
-                    println((s.t,"Control Updated."));
+                    println((b.t,"Control Updated."));
+                end
+            elseif controlMode == "tlqg" # T-LQG (with PControl)
+                #println(b_new)
+                tcalc_true, U_pool = tlqgControlUpdate(tlqg,b_new,U_pool,verbose=verbose,online=true)
+                if !isnothing(tcalc_true)
+                    push!(tcalc_true_history,tcalc_true);
+                end
+                if verbose
+                    println((b.t,"Control Updated."));
+                end
+            elseif controlMode == "tlqg_offline" # T-LQG (with PControl), offline
+                tcalc_true, U_pool = tlqgControlUpdate(tlqg,b_new,U_pool,verbose=verbose,online=false)
+                if !isnothing(tcalc_true)
+                    push!(tcalc_true_history,tcalc_true);
+                end
+                if verbose
+                    println((b.t,"Control Updated."));
                 end
             end
             # Control Execution.
@@ -280,6 +309,11 @@ function simulate_main(controlMode::String; rng_num::Int64,
     # Simulation Parameters
     tf = 20.;    # Simulation Time.
 
+    # T-LQG Planner
+    Th_tlqg = Th;
+    kl_threshold = 25.0;
+    tlqg = TLQG_Planner_Manipulate2D(Th_tlqg,dto,Q,R,Cs,Cu,u_param_min,u_param_max,posGain,rotGain,kl_threshold)
+
     x_init, a_true, b_true = get_initial_true_state();
     if plotfig
         frame = visualizeSimEnv(x_init.pos[1],x_init.pos[2],x_init.θ,
@@ -299,7 +333,7 @@ function simulate_main(controlMode::String; rng_num::Int64,
                  u_param_min=u_param_min, u_param_max=u_param_max,
                  posGain=posGain, rotGain=rotGain,
                  Th=Th, tf=tf, mcts_param=mcts_param,
-                 ilqgPolicy=ilqgPolicy,
+                 ilqgPolicy=ilqgPolicy, tlqg=tlqg,
                  animate=animate, plotfig=plotfig, verbose=verbose);
     println("Average control computation time: $(round(mean(tcalc_true_history), digits=3)) [s]")
     return y_history,tcalc_true_history,b_history,x_history,u_history,U_pool, Cs, Cu
@@ -312,4 +346,6 @@ if abspath(PROGRAM_FILE) == @__FILE__
     simulate_main("mcts", rng_num=202, animate=true, plotfig=true, verbose=false);
     println("3. Simulation with Belief iLQG Controller")
     simulate_main("ilqg", rng_num=202, animate=true, plotfig=true, verbose=false);
+    println("4. Simulation with T-LQG Controller")
+    simulate_main("tlqg", rng_num=202, animate=true, plotfig=true, verbose=false);
 end
