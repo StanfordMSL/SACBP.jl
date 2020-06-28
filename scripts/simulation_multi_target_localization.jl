@@ -373,5 +373,4 @@ if abspath(PROGRAM_FILE) == @__FILE__
     simulate_main("mcts", rng_num=169, animate=true, plotfig=true, verbose=false);
     println("4. Simulation with T-LQG Controller")
     simulate_main("tlqg", rng_num=169, animate=true, plotfig=true, verbose=false);
-    simulate_main("tlqg_offline", rng_num=169, animate=true, plotfig=true, verbose=false);
 end
