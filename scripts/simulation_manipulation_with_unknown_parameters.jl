@@ -123,7 +123,7 @@ function simulate(b_init::BelMvNormal{<:Real},
     elseif controlMode == "ilqg" # Belief iLQG (initialized with PControl)
         @assert !isnothing(ilqgPolicy) "iLQG Policy file not given"
         @time U_default = ilqgControlUpdate(ilqgPolicy,b_init,U_default,u_param_min,u_param_max,dto,dto)
-    elseif controlMode == "tlqg" || controlMode == "tlqg_offline"
+    elseif controlMode == "tlqg"
         @assert !isnothing(tlqg) "T-LQG Planner object not given"
         @time ~,U_default = tlqgControlUpdate(tlqg,b_init,U_default,verbose=verbose,online=true)
     elseif controlMode == "tlqg_offline"

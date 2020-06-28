@@ -1,3 +1,4 @@
+ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")
 using Distributed
 # using 4 cores
 if 4 - Distributed.nprocs() > 0
@@ -15,6 +16,7 @@ using FileIO
 
 include(joinpath(@__DIR__, "../baseline_implementations/gradient_greedy.jl"))
 include(joinpath(@__DIR__, "../baseline_implementations/mcts.jl"))
+include(joinpath(@__DIR__, "../baseline_implementations/tlqg.jl"))
 
 function get_initial_augmented_state(;Nt=20) # Number of Targets
     p_init = PhysPos(0.,[12.0,12.0]);
@@ -110,9 +112,10 @@ function simulate(s_init::AugState{<:PhysPos,<:VecBelMvNormal},
                   Th::Float64=2.0, # planning horizon [s]
                   tf::Float64=200.0, # simulation horizon [s]
                   mcts_param::Union{Nothing, MCTSParams}=nothing,
+                  tlqg::Union{Nothing, TLQG_Planner_PosRangeLocalization2D}=nothing,
                   animate=true, plotfig=true, verbose=true)
     rng = MersenneTwister(rng_num)
-    @assert controlMode in ["greedy", "sacbp", "mcts"];
+    @assert controlMode in ["greedy", "sacbp", "mcts", "tlqg", "tlqg_offline"];
     if animate
         # Animation Object.
         anim = Animation();
@@ -145,6 +148,14 @@ function simulate(s_init::AugState{<:PhysPos,<:VecBelMvNormal},
         @time U_default = sacControlUpdate(simPosUKF,s_init,U_default,u_param_min,u_param_max,numSamples,rng,offline=true)[1]
     elseif controlMode == "mcts" # MCTS.
         @time U_default = mctsControlUpdate(mctsPolicyPlain,s_init,U_default,dto)
+    elseif controlMode == "tlqg"
+        @assert !isnothing(tlqg) "T-LQG Planner object not given"
+        @time ~,U_default = tlqgControlUpdate(tlqg,s_init,U_default,verbose=verbose,online=true)
+    elseif controlMode == "tlqg_offline"
+        # offline == planner can take much longer time to compute NLP iterations (until convergence).
+        # Only for collecting computation time statistics
+        @assert !isnothing(tlqg) "T-LQG Planner object not given"
+        @time ~,U_default = tlqgControlUpdate(tlqg,s_init,U_default,verbose=verbose,online=false)
     end
     println("Controller Compiled. Starting Simulation...")
 
@@ -196,6 +207,22 @@ function simulate(s_init::AugState{<:PhysPos,<:VecBelMvNormal},
             elseif controlMode == "mcts"; # MCTS.
                 tcalc_true = @elapsed U_pool = mctsControlUpdate(mctsPolicyPlain,s_new,U_pool,dto);
                 push!(tcalc_true_history,tcalc_true);
+                if verbose
+                    println((s.t,"Control Updated."));
+                end
+            elseif controlMode == "tlqg" # T-LQG
+                tcalc_true, U_pool = tlqgControlUpdate(tlqg,s_new,U_pool,verbose=verbose,online=true)
+                if !isnothing(tcalc_true)
+                    push!(tcalc_true_history,tcalc_true);
+                end
+                if verbose
+                    println((s.t,"Control Updated."));
+                end
+            elseif controlMode == "tlqg_offline" # T-LQG, offline
+                tcalc_true, U_pool = tlqgControlUpdate(tlqg,s_new,U_pool,verbose=verbose,online=false)
+                if !isnothing(tcalc_true)
+                    push!(tcalc_true_history,tcalc_true);
+                end
                 if verbose
                     println((s.t,"Control Updated."));
                 end
@@ -264,6 +291,10 @@ function simulate(s_init::AugState{<:PhysPos,<:VecBelMvNormal},
             title = "SACBP"
         elseif controlMode == "mcts"
             title = "MCTS-DPW"
+        elseif controlMode == "tlqg"
+            title = "T-LQG"
+        elseif controlMode == "tlqg_offline"
+            title = "T-LQG (Offline)"
         end
         plot!(title=title)
         savefig(fig_path)
@@ -305,6 +336,11 @@ function simulate_main(controlMode::String; rng_num::Int64,
     Nt = 20;     # Number of Targets.
     tf = 200.;    # Simulation Time.
 
+    # T-LQG Planner
+    Th_tlqg = Th;
+    kl_threshold = 1e6;
+    tlqg = TLQG_Planner_PosRangeLocalization2D(Th_tlqg,dto,Nt,Q,Cu,u_param_min,u_param_max,kl_threshold)
+
     # Initial Augmented State
     s_init = get_initial_augmented_state(Nt=Nt);
 
@@ -322,7 +358,7 @@ function simulate_main(controlMode::String; rng_num::Int64,
         simulate(s_init, q_history, controlMode, rng_num,
                  simPosUKF, numSamples=numSamples,
                  u_param_min=u_param_min, u_param_max=u_param_max,
-                 Th=Th, tf=tf, mcts_param=mcts_param,
+                 Th=Th, tf=tf, mcts_param=mcts_param, tlqg=tlqg,
                  animate=animate, plotfig=plotfig, verbose=verbose);
     println("Average control computation time: $(round(mean(tcalc_true_history), digits=3)) [s]")
     return y_history,tcalc_true_history,s_history,u_history,U_pool
@@ -335,4 +371,7 @@ if abspath(PROGRAM_FILE) == @__FILE__
     simulate_main("sacbp", rng_num=169, animate=true, plotfig=true, verbose=false);
     println("3. Simulation with MCTS-DPW Controller")
     simulate_main("mcts", rng_num=169, animate=true, plotfig=true, verbose=false);
+    println("4. Simulation with T-LQG Controller")
+    simulate_main("tlqg", rng_num=169, animate=true, plotfig=true, verbose=false);
+    simulate_main("tlqg_offline", rng_num=169, animate=true, plotfig=true, verbose=false);
 end
