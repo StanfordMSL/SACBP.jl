@@ -288,7 +288,7 @@ function simulate(s_init::AugState{<:PhysPos,<:VecBelMvNormal},
         if controlMode == "greedy"
             title = "Greedy"
         elseif controlMode == "sacbp"
-            title = "SACBP"
+            title = "SACBP (Ours)"
         elseif controlMode == "mcts"
             title = "MCTS-DPW"
         elseif controlMode == "tlqg"
