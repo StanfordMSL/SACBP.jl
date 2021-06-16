@@ -82,13 +82,13 @@ class TLQG_PosRangeLocalization2D:
             if online: # we care about computation time of the entire T-LQG planning
                 solver_options = dict([('print_level', 0), ('max_iter', 50), ('max_cpu_time', 0.2)])
             else:
-                solver_options = dict([('print_level', 0), ('max_iter', 3000), ('max_cpu_time', 250)])
+                solver_options = dict([('print_level', 0), ('max_iter', 3000000), ('max_cpu_time', 3600)])
 
         else:
             if online:
                 solver_options = dict([('max_iter', 50), ('max_cpu_time', 0.2)])
             else:
-                solver_options = dict([('max_iter', 3000), ('max_cpu_time', 250)])
+                solver_options = dict([('max_iter', 3000000), ('max_cpu_time', 3600)])
         self.opti.solver('ipopt', dict(), solver_options)
         x_array = []
         P_array = []
@@ -319,13 +319,13 @@ class TLQG_Manipulate2D:
             if online: # we care about computation time of the entire T-LQG planning
                 solver_options = dict([('print_level', 0), ('max_iter', 50), ('max_cpu_time', 0.2)])
             else:
-                solver_options = dict([('print_level', 0), ('max_iter', 3000), ('max_cpu_time', 250)])
+                solver_options = dict([('print_level', 0), ('max_iter', 3000000), ('max_cpu_time', 3600)])
 
         else:
             if online:
                 solver_options = dict([('max_iter', 50), ('max_cpu_time', 0.2)])
             else:
-                solver_options = dict([('max_iter', 3000), ('max_cpu_time', 250)])
+                solver_options = dict([('max_iter', 3000000), ('max_cpu_time', 3600)])
         self.opti.solver('ipopt', dict(), solver_options)
         x_array = []
         P_array = []

@@ -310,8 +310,8 @@ function simulate_main(controlMode::String; rng_num::Int64,
     tf = 20.;    # Simulation Time.
 
     # T-LQG Planner
-    Th_tlqg = Th;
-    kl_threshold = 25.0;
+    Th_tlqg = tf;#Th;
+    kl_threshold = Inf;#25.0;
     tlqg = TLQG_Planner_Manipulate2D(Th_tlqg,dto,Q,R,Cs,Cu,u_param_min,u_param_max,posGain,rotGain,kl_threshold)
 
     x_init, a_true, b_true = get_initial_true_state();
@@ -346,6 +346,6 @@ if abspath(PROGRAM_FILE) == @__FILE__
     simulate_main("mcts", rng_num=202, animate=true, plotfig=true, verbose=false);
     println("3. Simulation with Belief iLQG Controller")
     simulate_main("ilqg", rng_num=202, animate=true, plotfig=true, verbose=false);
-    println("4. Simulation with T-LQG Controller")
-    simulate_main("tlqg", rng_num=202, animate=true, plotfig=true, verbose=false);
+    println("4. Simulation with T-LQG Controller (Offline)")
+    simulate_main("tlqg_offline", rng_num=202, animate=true, plotfig=true, verbose=false);
 end
